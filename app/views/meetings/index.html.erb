@@ -1,4 +1,17 @@
-<p id="notice"><%= notice %></p>
+
+
+<%= month_calendar(attribute: :start_date, events: @meetings) do |date, meetings| %>
+<%= date %>
+
+<% meetings.each do |meeting| %>
+  <div>
+    <%= meeting.name %>
+    
+  </div>
+<% end %>
+<% end %>
+  
+
 
 <h1>Meetings</h1>
 
