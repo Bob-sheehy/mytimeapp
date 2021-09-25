@@ -22,6 +22,7 @@
       <th>Start date</th>
       <th>End date</th>
       <th>Duration</th>
+      <th></th>
       <th>Overtime</th>
       <th colspan="3"></th>
     </tr>
@@ -35,6 +36,7 @@
         <td><%= meeting.end_date %></td>
         <td><%= meeting.duration %></td>
         <td><%= meeting.overtime %></td>
+        
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
