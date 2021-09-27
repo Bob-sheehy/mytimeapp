@@ -1,7 +1,9 @@
 class Meeting < ApplicationRecord
+           
 
+  #need validation so i cant add overlapping meetings
 
-    # save duration as an integer 
+    # save duration and overtime as an integer 
     before_save :set_duration
       before_save :daily_total_ot
 
@@ -21,5 +23,16 @@ class Meeting < ApplicationRecord
    
      end
 
+   # method for total overtime altogether
+
+
+   # method for total overtime between flexi period months 
+
+   # bootstrap progress bar for a flexi day 
+   #n ot finished yet
+   def duration_percent
+    duration / 24.hours.to_f * 100
+  end
+  
 
 end

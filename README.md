@@ -5,20 +5,16 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Add devise authentication
 
-* System dependencies
+* Add validation for stopping time overlaps
 
-* Configuration
+* Clean up Dashboard and home page 
 
-* Database creation
+* Add options column to meeting column with options "Annual Leave, Sick Day, Training"
 
-* Database initialization
+* Add validation for options column for example if any of options are choosen automatically fill Start_date, End_date columns 7 hours 25 minutes
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* Deployment to heroku 
 
 * ...

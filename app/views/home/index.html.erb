@@ -1,20 +1,20 @@
 <div class="text-center"S>
 <h1 class="text-align center">My Time App</h1>
-<p><%= Time.now %></p>
+<h2><%= Time.now.strftime("%d-%b-%Y %I:%M %p") %></h2>
 </div>
 
-
+<div class="mw-90">
 <%= month_calendar(attribute: :start_date, events: @meetings) do |date, meetings| %>
 <%= date %>
 
 <% meetings.each do |meeting| %>
   <div>
-   <br>
+  
    <button type="button" class="btn btn-success">
     <%= meeting.start_date.strftime("%d-%b-%Y %I:%M %p") %>
-  </button> <br>
+  </button> 
   <button type="button" class="btn btn-danger">
-    <%= meeting.end_date.strftime("%d-%b-%Y %I:%M %p") %></button> <br>
+    <%= meeting.end_date.strftime("%d-%b-%Y %I:%M %p") %></button>
   </div>
 <% end %>
 <% if Meeting.daily_total_duration(date) > 0 %>
@@ -23,10 +23,9 @@
 <% end  %>
 <% end %>
   
-
-
-<p id="notice"><%= notice %></p>
-
+</div>
+</div>
+<div class="mw-90">
 <h1>Meetings</h1>
 
 <table class="table">
@@ -44,11 +43,15 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
-        <td><%= meeting.name %></td>
-        <td><%= meeting.start_date %></td>
-        <td><%= meeting.end_date %></td>
-        <td><%= meeting.duration %></td>
-        <td><%= meeting.overtime %></td>
+        <td><%= meeting.start_date.strftime("%d-%b-%Y") %></td>
+        <td><%= meeting.start_date.strftime("%I:%M %p") %></td>
+        <td><%= meeting.end_date.strftime("%I:%M %p")  %></td>
+        <td><%= Time.at(meeting.duration).utc.strftime("%H hours and %M minutes ") %></td>
+        <% if  (meeting.daily_total_ot) > 0 %>
+        <td><%= Time.at(meeting.daily_total_ot).utc.strftime("%H hours and %M minutes ") %></td>
+         <% else  %>
+        <td>No Overtime</td>
+        <% end %>
       
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
@@ -61,3 +64,4 @@
 <br>
 
 <%= link_to 'New Meeting', new_meeting_path %>
+</div>

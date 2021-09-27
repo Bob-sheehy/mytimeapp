@@ -1,0 +1,57 @@
+
+<div class="mw-90">
+<h1>Meetings</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Start date</th>
+     <th>End date</th>
+      <th>Duration</th>
+      <th>Duration Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @meetings.pluck("start_date").map{ |x| x.to_date}.sort.uniq.each do | date | %>
+  <tr>
+   <td> <%= date.strftime("%d-%b-%Y") %> </td>
+   <td><h3>Total Overtime</h3></td>
+   
+
+  </tr>
+    <% @meetings.where(start_date: (date.to_time)..date.to_time+86399).each do | meeting | %>
+      <tr>
+        <td><% meeting.name %></td>
+        <td><% meeting.start_date.strftime("%d-%b-%Y %I:%M %p") %></td>
+        <td><% meeting.end_date.strftime("%d-%b-%Y %I:%M %p") %></td>
+        <td><%= meeting.duration %></td>
+       
+        
+       <% if  (meeting.daily_total_ot) > 26700 %>
+       <td><%= Time.at(meeting.daily_total_ot).utc.strftime("%H hours and %M minutes ") %></td>
+        <% else  %>
+       <td>No Overtime</td>
+       <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+  <% end %>
+</table>
+<br><br>
+
+<% @meetings.each do |meeting| %>
+<% if (meeting.daily_total_ot - 26700) > 0 %>
+<div class="progress"><br>
+  <div class="progress-bar bg-success" role="progressbar" style="width: <%= meeting.duration_percent %>%;" aria-valuenow="<%= meeting.duration_percent %>" aria-valuemin="0" aria-valuemax="100"><%= Time.at(meeting.daily_total_ot - 26700).utc.strftime("%H hours and %M minutes ") %>%</div>
+  <br>
+</div>
+<br>
+<% end %>
+
+<% end %>
+<br>
+
+
+</div>
